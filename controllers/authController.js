@@ -7,26 +7,26 @@ export const RegisterController=async(req,res) => {
     const {name,email,password,phone,address}=req.body
     //validation
     if(!name){
-      return res.send({error:'Name is Required'})
+      return res.send({massage:'Name is Required'})
     }
     if(!email){
-      return res.send({error:'Email is Required'})
+      return res.send({massage:'Email is Required'})
     }
         if(!password){
-      return res.send({error:'Password is Required'})
+      return res.send({massage:'Password is Required'})
     }
         if(!phone){
-      return res.send({error:'Phone is Required'})
+      return res.send({massage:'Phone is Required'})
     }
         if(!address){
-      return res.send({error:'Address is Required'})
+      return res.send({massage:'Address is Required'})
     }
 //check user
 const existingUser=await userModel.findOne({email})
 //check existing user
 if(existingUser){
   return res.status(200).send({
-    success:true,
+    success:false,
     massage:'Alredy Register please login'
   })
 }
