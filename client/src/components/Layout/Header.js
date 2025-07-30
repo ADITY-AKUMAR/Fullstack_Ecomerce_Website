@@ -1,7 +1,19 @@
 import React from 'react'
 import { NavLink ,Link} from 'react-router-dom'
-import { GiShoppingBag } from "react-icons/gi";
+import { useAuth } from '../../context/auth'
+import toast from "react-hot-toast";
+
 const Header = () => {
+  const [auth,setAuth]=useAuth()
+    const handleLogout = () => {
+    setAuth({
+      ...auth,
+      user: null,
+      token: "",
+    });
+    localStorage.removeItem("auth");
+    toast.success("Logout Successfully");
+  };
   return (
     <div>
     
@@ -12,7 +24,7 @@ const Header = () => {
     </button>
     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
       <Link to='/' className="navbar-brand">
-      <GiShoppingBag />Ecomerce App</Link>
+      🛒 Ecommerce App</Link>
       <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
         <li className="nav-item">
           <NavLink to='/' className="nav-link" aria-current="page" href="#">
@@ -24,12 +36,21 @@ const Header = () => {
           </NavLink>
         </li>
 
-        <li className="nav-item">
+{
+  !auth.user ?(<>
+          <li className="nav-item">
           <NavLink to='/Register' className="nav-link" href="#">Register</NavLink>
         </li>
         <li className="nav-item">
           <NavLink to='/Login' className="nav-link" href="#">Login</NavLink>
         </li>
+
+  </>) : (<>
+          <li className="nav-item">
+          <NavLink onClick={handleLogout} to='/Logout' className="nav-link" href="#">Logout</NavLink>
+        </li>
+  </>)
+}
         <li className="nav-item">
           <NavLink to='/Cart' className="nav-link" href="#">Cart(0)</NavLink>
         </li>
