@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    answer:{
+      type: String,
+      required:true
+    },
     // Role field: a number, by default set to 0 (like 0 = user, 1 = admin)
     role: {
       type: Number,
