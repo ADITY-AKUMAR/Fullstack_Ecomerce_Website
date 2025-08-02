@@ -21,11 +21,25 @@ import AdminMenu from "./components/Layout/AdminMenu";
 import Orders from "./pages/user/Orders";
 import Profile from "./pages/user/Profile";
 
+// import { SearchProvider } from "./context/search"; // ✅ Use only this provider here
+import Search from "./pages/Search";
+import ProductDetails from "./pages/ProductDetail";
+import Categories from "./pages/Categories";
+import CategoryProduct from "./pages/CategoryProduct";
+import CartPage from "./pages/CartPage";
+
 function App() {
   return (
-    <>
+    // <SearchProvider>
       <Routes>
         <Route path="/" element={<HomePages />} />
+        <Route path="/product/:slug" element={<ProductDetails />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/cart" element={<CartPage />} />
+
+        <Route path="/category/:slug" element={<CategoryProduct />} />
+
+        <Route path="/search" element={<Search />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -33,14 +47,14 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/policy" element={<Policy />} />
 
-        {/* ✅ Private Route wrapper for dashboard */}
+        {/* Private Routes */}
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="user" element={<Dashboard />} />
           <Route path="user/orders" element={<Orders />} />
           <Route path="user/Profile" element={<Profile />} />
         </Route>
 
-        {/* 404 Page */}
+        {/* Admin Routes */}
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="admin/create-category" element={<CreateCategory />} />
@@ -51,9 +65,11 @@ function App() {
           <Route path="admin/product/:slug" element={<UpdateProduct />} />
           <Route path="admin/admin-menu" element={<AdminMenu />} />
         </Route>
+
+        {/* 404 */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-    </>
+    // </SearchProvider>
   );
 }
 

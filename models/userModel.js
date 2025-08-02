@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
     },
     // Address field: must be a string and is required
     address: {
-      type: String,
+      type: {},
       required: true
     },
     answer:{
