@@ -1,8 +1,9 @@
 import React from "react";
-import Footer from "./Footer";
 import Header from "./Header";
+import Footer from "./Footer";
 import { Helmet } from "react-helmet";
-import { ToastContainer } from "react-toastify";
+import { Toaster } from "react-hot-toast"; // ✅ Toast import
+
 const Layout = ({ children, title, description, keywords, author }) => {
   return (
     <div>
@@ -14,20 +15,18 @@ const Layout = ({ children, title, description, keywords, author }) => {
         <title>{title}</title>
       </Helmet>
       <Header />
-      <main style={{ minHeight: "70vh" }}>
-      <ToastContainer/>
-        {children}
-      </main>
+      <main style={{ minHeight: "70vh" }}>{children}</main>
       <Footer />
+      <Toaster position="top-center" reverseOrder={false} /> {/* ✅ Toast rendering */}
     </div>
   );
 };
 
 Layout.defaultProps = {
-  title: "Ecommerce app - shop now",
+  title: "Ecommerce App",
   description: "mern stack project",
   keywords: "mern,react,node,mongodb",
-  author: "Techinfoyt",
+  author: "Aditya",
 };
 
 export default Layout;
